@@ -1,0 +1,36 @@
+---
+const { frontmatter } = Astro.props;
+---
+<a href="/blog">Atrás</a>
+<h1>{frontmatter.title}</h1>
+<p>Escrito por {frontmatter.author}</p>
+<p>Publicado el: {frontmatter.pubDate.toString().split("T")[0]}</p>
+<p>
+    <em>{frontmatter.description}</em>
+</p>
+<slot />
+<div>
+    Hashtags: {frontmatter.tags.map(tag => <span>#{tag}</span>)}
+</div>
+<img src={frontmatter.image.url} width="400" alt={frontmatter.image.alt}>
+
+<style>
+    a {
+        font-size: 1.25em;
+        text-decoration: none;
+        padding: 8px;
+        color: white;
+        background-color: dodgerblue;
+        border-radius: 5px;
+    }
+
+    div {
+        display: flex;
+        gap: 8px;
+    }
+
+    img {
+        background-color: black;
+        border-radius: 25px;
+    }
+</style>
