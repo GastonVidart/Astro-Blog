@@ -12,6 +12,7 @@ const allPosts = await Astro.glob("./posts/*.md")
 </BaseLayout>
 
 <script define:vars={{allPosts}}>
+	//TODO: extraer script, tener en cuenta la var allPosts que es de astro
 	//FIXME: el valor queda setteado en el input.
 	const input = document.getElementById("input-tags")
 	const listContainer = document.getElementById("list-container")
