@@ -1,7 +1,47 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = "Página de inicio";
+
+const allPosts = await Astro.glob("./posts/*.md")
 ---
 <BaseLayout pageTitle={pageTitle}>
 	<h2>Mi impresionante subtítulo del blog</h2>
+	<label for="input-tags">Buscar: </label>
+	<input id="input-tags">
+	<ul id="list-container"></ul>
 </BaseLayout>
+
+<script define:vars={{allPosts}}>
+	//TODO: extraer script, tener en cuenta la var allPosts que es de astro
+	//FIXME: el valor queda setteado en el input.
+	const input = document.getElementById("input-tags")
+	const listContainer = document.getElementById("list-container")
+	listContainer.remove
+
+	input.addEventListener("input", (e)=> {
+		let tagSearch = e.target.value
+		const filtered = !tagSearch
+			? []
+			: allPosts.filter((post) =>
+				post.frontmatter.tags?.some(tag => tag.includes(tagSearch) )
+			);
+
+		const listItems = filtered.map(post => {
+			//TODO: mejorar para traer el BlogPost component
+			const text = document.createTextNode(post.frontmatter.title)
+
+			const link = document.createElement("a")
+			link.setAttribute("href", post.url)
+			link.appendChild(text)
+
+			const item = document.createElement("li")
+			item.appendChild(link)
+			
+			return item
+		});
+
+		listContainer.replaceChildren(...listItems);
+	})
+
+
+</script>
