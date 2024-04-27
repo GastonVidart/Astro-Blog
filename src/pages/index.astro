@@ -19,18 +19,13 @@ const allPosts = await Astro.glob("./posts/*.md")
 
 	input.addEventListener("input", (e)=> {
 		let tagSearch = e.target.value
-		console.log(tagSearch)
 		const filtered = !tagSearch
 			? []
 			: allPosts.filter((post) =>
 				post.frontmatter.tags?.some(tag => tag.includes(tagSearch) )
 			);
 
-		console.log(filtered)
-
 		const listItems = filtered.map(post => {
-			console.log(post)
-
 			//TODO: mejorar para traer el BlogPost component
 			const text = document.createTextNode(post.frontmatter.title)
 
