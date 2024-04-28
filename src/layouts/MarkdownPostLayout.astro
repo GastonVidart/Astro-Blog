@@ -6,7 +6,7 @@ import { fade } from "astro:transitions";
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageTitle={frontmatter.title}>
-    <p>Escrito por {frontmatter.author}</p>
+    <p>Escrito por: <a href="/about/">{frontmatter.author}</a></p>
     {/*FIXME: se muesta mal la fecha (-1 día)*/}
     <p>Publicado el: {frontmatter.pubDate.toLocaleDateString("es-AR")}</p>
 
