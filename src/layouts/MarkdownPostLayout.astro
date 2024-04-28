@@ -2,6 +2,7 @@
 import TagsList from "../components/TagsList.astro";
 import BaseLayout from "./BaseLayout.astro";
 
+import { fade } from "astro:transitions";
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageTitle={frontmatter.title}>
@@ -9,7 +10,7 @@ const { frontmatter } = Astro.props;
     {/*FIXME: se muesta mal la fecha (-1 día)*/}
     <p>Publicado el: {frontmatter.pubDate.toLocaleDateString("es-AR")}</p>
 
-    <p>
+    <p transition:animate={fade({ duration: '2s' })} >
         <em>{frontmatter.description}</em>
     </p>
 
