@@ -6,7 +6,8 @@ const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageTitle={frontmatter.title}>
     <p>Escrito por {frontmatter.author}</p>
-    <p>Publicado el: {frontmatter.pubDate.toString().split("T")[0]}</p>
+    {/*FIXME: se muesta mal la fecha (-1 día)*/}
+    <p>Publicado el: {frontmatter.pubDate.toLocaleDateString("es-AR")}</p>
 
     <p>
         <em>{frontmatter.description}</em>

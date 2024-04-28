@@ -1,9 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Greeting from '../components/Greeting';
 const pageTitle = "Página de inicio";
 
-const allPosts = await Astro.glob("./posts/*.md")
+const allPosts = await getCollection("posts");
 ---
 <BaseLayout pageTitle={pageTitle}>
 	<h2>Mi impresionante subtítulo del blog</h2>
@@ -29,15 +30,15 @@ const allPosts = await Astro.glob("./posts/*.md")
 		const filtered = !tagSearch
 			? []
 			: allPosts.filter((post) =>
-				post.frontmatter.tags?.some(tag => tag.includes(tagSearch) )
+				post.data.tags?.some(tag => tag.includes(tagSearch) )
 			);
 
 		const listItems = filtered.map(post => {
 			//TODO: mejorar para traer el BlogPost component
-			const text = document.createTextNode(post.frontmatter.title)
+			const text = document.createTextNode(post.data.title)
 
 			const link = document.createElement("a")
-			link.setAttribute("href", post.url)
+			link.setAttribute("href", `/posts/${post.slug}`)
 			link.appendChild(text)
 
 			const item = document.createElement("li")
