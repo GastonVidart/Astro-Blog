@@ -1,6 +1,5 @@
 ---
 #frontmatter del sitio, tiene info que usa astro despues
-layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Mi primera publicación en el blog'
 pubDate: 2022-07-01
 description: 'Este es la primera publicación de mi nuevo blog Astro.'
